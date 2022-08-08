@@ -8,7 +8,14 @@ export default function App() {
   return (
     <div>
       <CssBaseline />
-      <h1>Hello World</h1>
+      {/* <h1>Hello World</h1> */}
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Movies />} />
+        <Route path="/movie/:id" element={<MovieInformation />} />
+        <Route path="/actor/:id" element={<Actors />} />
+        <Route path="/profile/:id" element={<Profile />} />
+      </Routes>
     </div>
   );
 }
