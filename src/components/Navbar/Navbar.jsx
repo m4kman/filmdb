@@ -14,7 +14,6 @@ import {
   AccountCircle,
 } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
-import { display } from "@mui/system";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
