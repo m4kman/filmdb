@@ -8,7 +8,7 @@ export default function App() {
   return (
     <div>
       <CssBaseline />
-      {/* <h1>Hello World</h1> */}
+
       <Navbar />
       <Routes>
         <Route path="/" element={<Movies />} />
