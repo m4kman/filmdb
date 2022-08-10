@@ -23,7 +23,7 @@ export default function Navbar() {
   const isAuthenticated = true;
   return (
     <>
-      <AppBar position="fixed">
+      <AppBar position="sticky">
         <Toolbar
           sx={{
             height: "80px",
