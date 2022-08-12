@@ -10,6 +10,8 @@ import {
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
+// Logo config: fontsize - 50, san-serif, allerBd, concave-bottom (50)
+
 import redlogo from "./redlogo.png";
 import bluelogo from "./bluelogo.png";
 
