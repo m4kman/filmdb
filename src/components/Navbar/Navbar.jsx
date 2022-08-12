@@ -95,6 +95,7 @@ export default function Navbar() {
       </AppBar>
       <div>
         <Box
+          component="nav"
           sx={{
             [theme.breakpoints.up("sm")]: {
               width: drawerWidth,
@@ -102,26 +103,24 @@ export default function Navbar() {
             },
           }}
         >
-          <nav>
-            {isMobile ? (
-              <Drawer
-                variant="temporary"
-                anchor="right"
-                open={mobileOpen}
-                sx={{
-                  width: drawerWidth,
-                }}
-                ModalProps={{ keepMounted: true }}
-                onClose={toggleDrawer}
-              >
-                <Sidebar />
-              </Drawer>
-            ) : (
-              <Drawer sx={{ width: drawerWidth }} variant="permanent" open>
-                <Sidebar />
-              </Drawer>
-            )}
-          </nav>
+          {isMobile ? (
+            <Drawer
+              variant="temporary"
+              anchor="right"
+              open={mobileOpen}
+              sx={{
+                width: drawerWidth,
+              }}
+              ModalProps={{ keepMounted: true }}
+              onClose={toggleDrawer}
+            >
+              <Sidebar />
+            </Drawer>
+          ) : (
+            <Drawer sx={{ width: drawerWidth }} variant="permanent" open>
+              <Sidebar />
+            </Drawer>
+          )}
         </Box>
       </div>
     </>
