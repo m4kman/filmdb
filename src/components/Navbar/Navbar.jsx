@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -6,6 +6,8 @@ import {
   useMediaQuery,
   Avatar,
   Button,
+  Drawer,
+  Box,
 } from "@mui/material";
 import {
   Menu,
@@ -16,10 +18,19 @@ import {
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
+import { Sidebar } from "../index";
+
 export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 600px)");
   const theme = useTheme();
   const isAuthenticated = true;
+  const drawerWidth = "240px";
+
+  function toggleDrawer() {
+    setMobileOpen((prevState) => !prevState);
+  }
+
   return (
     <>
       <AppBar position="sticky">
@@ -44,6 +55,7 @@ export default function Navbar() {
                 marginRight: theme.spacing(2),
                 [theme.breakpoints.up("sm")]: { display: "none" },
               }}
+              onClick={toggleDrawer}
             >
               <Menu />
             </IconButton>
@@ -58,7 +70,17 @@ export default function Navbar() {
                 Login &nbsp; <AccountCircle />
               </Button>
             ) : (
-              <Button color="inherit" component={Link} to="/profile/:id">
+              <Button
+                color="inherit"
+                component={Link}
+                to="/profile/:id"
+                sx={{
+                  "&:hover": {
+                    color: "white !important",
+                    textDecoration: "none",
+                  },
+                }}
+              >
                 {!isMobile && <>My Movies &nbsp;</>}
                 <Avatar
                   sx={{ width: 30, height: 30 }}
@@ -71,6 +93,37 @@ export default function Navbar() {
           {isMobile && "Search.."}
         </Toolbar>
       </AppBar>
+      <div>
+        <Box
+          sx={{
+            [theme.breakpoints.up("sm")]: {
+              width: drawerWidth,
+              flexShrink: 0,
+            },
+          }}
+        >
+          <nav>
+            {isMobile ? (
+              <Drawer
+                variant="temporary"
+                anchor="right"
+                open={mobileOpen}
+                sx={{
+                  width: drawerWidth,
+                }}
+                ModalProps={{ keepMounted: true }}
+                onClose={toggleDrawer}
+              >
+                <Sidebar />
+              </Drawer>
+            ) : (
+              <Drawer sx={{ width: drawerWidth }} variant="permanent" open>
+                <Sidebar />
+              </Drawer>
+            )}
+          </nav>
+        </Box>
+      </div>
     </>
   );
 }
