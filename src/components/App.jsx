@@ -8,7 +8,6 @@ export default function App() {
   return (
     <Box sx={{ display: "flex", height: "100%", flexWrap: "wrap" }}>
       <CssBaseline />
-
       <Navbar />
       <Box sx={{ flexGrow: 1, padding: "2em" }}>
         <Routes>
