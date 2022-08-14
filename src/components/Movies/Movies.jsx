@@ -15,26 +15,28 @@ export default function Movies() {
   }
 
   if (!data.results.length) {
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        mt: "20px",
-      }}
-    >
-      <Typography variant="h4">
-        No movies matched the search.
-        <br />
-        Please search for another movie.
-      </Typography>
-    </Box>;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          mt: "20px",
+        }}
+      >
+        <Typography variant="h4">
+          No movies matched the search.
+          <br />
+          Please search for another movie.
+        </Typography>
+      </Box>
+    );
   }
 
   if (error) return "An error occurred. ";
 
   return (
-    <>
+    <div>
       <MoviesList movies={data} />
-    </>
+    </div>
   );
 }
