@@ -32,7 +32,7 @@ export default function Movies() {
     );
   }
 
-  if (error) return "An error occurred. ";
+  if (error) return <>An error occurred</>;
 
   return (
     <div>

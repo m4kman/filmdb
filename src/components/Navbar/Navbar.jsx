@@ -25,7 +25,7 @@ export default function Navbar() {
   const isMobile = useMediaQuery("(max-width: 600px)");
   const theme = useTheme();
   const isAuthenticated = true;
-  const drawerWidth = "240px";
+  const drawerWidth = 240;
 
   function toggleDrawer() {
     setMobileOpen((prevState) => !prevState);
@@ -110,6 +110,9 @@ export default function Navbar() {
               open={mobileOpen}
               sx={{
                 width: drawerWidth,
+                "& .MuiDrawer-paper": {
+                  width: drawerWidth,
+                },
               }}
               ModalProps={{ keepMounted: true }}
               onClose={toggleDrawer}
@@ -117,7 +120,16 @@ export default function Navbar() {
               <Sidebar />
             </Drawer>
           ) : (
-            <Drawer sx={{ width: drawerWidth }} variant="permanent" open>
+            <Drawer
+              sx={{
+                width: drawerWidth,
+                "& .MuiDrawer-paper": {
+                  width: drawerWidth,
+                },
+              }}
+              variant="permanent"
+              open
+            >
               <Sidebar />
             </Drawer>
           )}
