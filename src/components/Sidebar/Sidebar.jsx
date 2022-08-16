@@ -5,12 +5,15 @@ import {
   ListItem,
   ListItemText,
   ListSubheader,
+  ListItemIcon,
   Box,
   CircularProgress,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useGetGenreQuery } from "../../services/TMDB";
+
+import genreIcons from "../../assets/genre";
 
 // Logo config: fontsize - 50, san-serif, allerBd, concave-bottom (50)
 
@@ -26,6 +29,8 @@ function Sidebar() {
     { label: "Upcoming", value: "upcoming" },
   ];
   const { data, isFetching } = useGetGenreQuery();
+
+  console.log(data);
 
   return (
     <>
@@ -59,6 +64,17 @@ function Sidebar() {
             }}
           >
             <ListItem button>
+              <ListItemIcon>
+                <Box
+                  component="img"
+                  src={genreIcons[value.toLowerCase()]}
+                  height={30}
+                  sx={{
+                    filter:
+                      theme.palette.mode === "light" ? "dark" : "invert(1)",
+                  }}
+                />
+              </ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>
           </Box>
@@ -83,6 +99,17 @@ function Sidebar() {
               }}
             >
               <ListItem button>
+                <ListItemIcon>
+                  <Box
+                    component="img"
+                    src={genreIcons[name.toLowerCase()]}
+                    height={30}
+                    sx={{
+                      filter:
+                        theme.palette.mode === "light" ? "dark" : "invert(1)",
+                    }}
+                  />
+                </ListItemIcon>
                 <ListItemText primary={name} />
               </ListItem>
             </Box>
