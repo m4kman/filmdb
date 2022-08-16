@@ -6,9 +6,11 @@ import {
   ListItemText,
   ListSubheader,
   Box,
+  CircularProgress,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { useGetGenreQuery } from "../../services/TMDB";
 
 // Logo config: fontsize - 50, san-serif, allerBd, concave-bottom (50)
 
@@ -23,12 +25,9 @@ function Sidebar() {
     { label: "Top Rated", value: "top_rated" },
     { label: "Upcoming", value: "upcoming" },
   ];
-  const demoGenres = [
-    { label: "Action", value: "action" },
-    { label: "Adventure", value: "adventure" },
-    { label: "Horror", value: "horror" },
-    { label: "Sci-fi", value: "scifi" },
-  ];
+  const { data, isFetching } = useGetGenreQuery();
+
+  console.log(data);
 
   return (
     <>
@@ -70,21 +69,27 @@ function Sidebar() {
       <Divider />
       <List>
         <ListSubheader>Genres</ListSubheader>
-        {demoGenres.map(({ label, value }) => (
-          <Box
-            key={value}
-            component={Link}
-            to="/"
-            sx={{
-              color: theme.palette.text.primary,
-              textDecoration: "none",
-            }}
-          >
-            <ListItem button>
-              <ListItemText primary={label} />
-            </ListItem>
+        {isFetching ? (
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <CircularProgress />
           </Box>
-        ))}
+        ) : (
+          data.genres.map(({ name, id }) => (
+            <Box
+              key={id}
+              component={Link}
+              to="/"
+              sx={{
+                color: theme.palette.text.primary,
+                textDecoration: "none",
+              }}
+            >
+              <ListItem button>
+                <ListItemText primary={name} />
+              </ListItem>
+            </Box>
+          ))
+        )}
       </List>
     </>
   );
