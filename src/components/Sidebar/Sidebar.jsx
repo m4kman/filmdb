@@ -27,8 +27,6 @@ function Sidebar() {
   ];
   const { data, isFetching } = useGetGenreQuery();
 
-  console.log(data);
-
   return (
     <>
       <Box
