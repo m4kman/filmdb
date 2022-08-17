@@ -13,6 +13,9 @@ import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useGetGenreQuery } from "../../services/TMDB";
 
+import { useDispatch } from "react-redux";
+import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
+
 import genreIcons from "../../assets/genre";
 
 // Logo config: fontsize - 50, san-serif, allerBd, concave-bottom (50)
@@ -29,8 +32,7 @@ function Sidebar() {
     { label: "Upcoming", value: "upcoming" },
   ];
   const { data, isFetching } = useGetGenreQuery();
-
-  console.log(data);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -63,7 +65,10 @@ function Sidebar() {
               textDecoration: "none",
             }}
           >
-            <ListItem button>
+            <ListItem
+              onClick={() => dispatch(selectGenreOrCategory(value))}
+              button
+            >
               <ListItemIcon>
                 <Box
                   component="img"
@@ -98,7 +103,10 @@ function Sidebar() {
                 textDecoration: "none",
               }}
             >
-              <ListItem button>
+              <ListItem
+                onClick={() => dispatch(selectGenreOrCategory(id))}
+                button
+              >
                 <ListItemIcon>
                   <Box
                     component="img"
