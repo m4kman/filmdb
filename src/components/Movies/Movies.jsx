@@ -6,12 +6,13 @@ import { useSelector } from "react-redux";
 
 export default function Movies() {
   const [page, setPage] = useState(1);
-  const { genreOrCategoryName } = useSelector(
+  const { genreOrCategoryName, searchQuery } = useSelector(
     (state) => state.currentGenreOrCategory
   );
   const { data, error, isFetching } = useGetMoviesQuery({
     genreOrCategoryName,
     page,
+    searchQuery,
   });
 
   if (isFetching) {

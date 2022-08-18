@@ -8,7 +8,11 @@ export const tmdbApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.themoviedb.org/3" }),
   endpoints: (builder) => ({
     getMovies: builder.query({
-      query: ({ genreOrCategoryName, page }) => {
+      query: ({ genreOrCategoryName, page, searchQuery }) => {
+        console.log(searchQuery);
+        if (searchQuery) {
+          return `search/movie?query=${searchQuery}&api_key=${tmdbAPIKey}&page=${page}`;
+        }
         if (genreOrCategoryName && typeof genreOrCategoryName === "string") {
           return `movie/${genreOrCategoryName}?api_key=${tmdbAPIKey}&page=${page}`;
         }
