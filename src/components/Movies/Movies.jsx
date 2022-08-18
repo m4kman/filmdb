@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useGetMoviesQuery } from "../../services/TMDB";
 import { MoviesList } from "../index";
-import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import { useSelector } from "react-redux";
 
 export default function Movies() {
