@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -17,15 +17,43 @@ import {
 } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Sidebar, Search } from "../index";
+import { fetchToken, createSessionID, tmdbApi } from "../../utils";
+import { setUser, userSelector } from "../../features/auth";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 600px)");
   const theme = useTheme();
-  const isAuthenticated = true;
   const drawerWidth = 240;
+  const token = localStorage.getItem("request_token");
+  const session_id = localStorage.getItem("session_id");
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector(userSelector);
+
+  console.log(user);
+
+  useEffect(() => {
+    const logIn = async () => {
+      if (token) {
+        if (session_id) {
+          const { data: userData } = await tmdbApi.get(
+            `/account?session_id=${session_id}`
+          );
+          dispatch(setUser(userData));
+        } else {
+          const new_session_id = await createSessionID();
+          const { data: userData } = await tmdbApi.get(
+            `/account?session_id=${new_session_id}`
+          );
+          dispatch(setUser(userData));
+        }
+      }
+    };
+    logIn();
+  }, [token]);
 
   function toggleDrawer() {
     setMobileOpen((prevState) => !prevState);
@@ -66,7 +94,7 @@ export default function Navbar() {
           {!isMobile && <Search />}
           <div>
             {!isAuthenticated ? (
-              <Button color="inherit">
+              <Button color="inherit" onClick={fetchToken}>
                 Login &nbsp; <AccountCircle />
               </Button>
             ) : (
