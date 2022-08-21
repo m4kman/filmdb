@@ -33,8 +33,6 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector(userSelector);
 
-  console.log(user);
-
   useEffect(() => {
     const logIn = async () => {
       if (token) {
@@ -101,7 +99,7 @@ export default function Navbar() {
               <Button
                 color="inherit"
                 component={Link}
-                to="/profile/:id"
+                to={`/profile/${user.id}`}
                 sx={{
                   "&:hover": {
                     color: "white !important",
