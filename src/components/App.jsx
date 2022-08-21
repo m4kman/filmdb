@@ -12,12 +12,11 @@ export default function App() {
       <CssBaseline />
       <Navbar />
       <Box
+        component="main"
         sx={{
+          width: "calc(100% - 240px)",
           flexGrow: 1,
           padding: "2em",
-          [theme.breakpoints.up("sm")]: {
-            marginLeft: "240px",
-          },
         }}
       >
         <Routes>
