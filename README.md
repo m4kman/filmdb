@@ -3,15 +3,18 @@
 An application for finding all sorts of different movies in various genres and more. Built in the React ecosystem.
 
 ## Progress
-- Implemented the layout of the application with a fully functional sidebar and search. 
+
+- Implemented the layout of the application with a fully functional sidebar and search.
 
 ## Screenshots
+
 ![Homepage of FilmDB](https://i.imgur.com/Dzfhzwl.png)
 
 ## To-do
-- Authentication
+
+- Authentication (FINISHED)
 - Dark Mode
-- Movie Information Component
+- Movie Information Component (IN PROGRESS)
 - Actor Component
 - and probably more..
 
