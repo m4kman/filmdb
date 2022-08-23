@@ -13,6 +13,7 @@ function Search() {
   function handleKey(e) {
     if (e.key === "Enter") {
       dispatch(searchMovie(query));
+      setQuery("");
     }
   }
   return (
