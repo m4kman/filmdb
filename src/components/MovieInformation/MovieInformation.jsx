@@ -97,7 +97,7 @@ export default function MovieInformation() {
               variant="subtitle1"
               sx={{ ml: "10px", alignSelf: "center", mt: "2px" }}
             >
-              {data?.vote_average} / 10
+              {data?.vote_average.toFixed(1)} / 10
             </Typography>
           </Box>
           <Typography variant="h6" align="center" gutterBottom>
